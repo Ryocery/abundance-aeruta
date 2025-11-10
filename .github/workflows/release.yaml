@@ -1,0 +1,49 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '6.0.x'
+
+      - name: Restore dependencies
+        run: dotnet restore abundance-aeruta/abundance-aeruta.csproj
+
+      - name: Build
+        run: dotnet build abundance-aeruta/abundance-aeruta.csproj --configuration Release --no-restore
+
+      - name: Create release package
+        run: |
+          mkdir -p release/BepInEx/plugins/abundance-aeruta
+          cp abundance-aeruta/bin/Release/net6.0/abundance-aeruta.dll release/BepInEx/plugins/abundance-aeruta/
+          cp README.md release/
+          cp LICENSE release/
+          cd release
+          zip -r ../abundance-aeruta-${{ github.ref_name }}.zip .
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: abundance-aeruta-${{ github.ref_name }}.zip
+          body: |
+            ## Installation
+            1. Install BepInEx IL2CPP for Aeruta
+            2. Extract this zip to your game directory
+            3. Launch the game to generate config
+            4. Edit `BepInEx/config/com.ryocery.abundance_aeruta.cfg` as desired
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
