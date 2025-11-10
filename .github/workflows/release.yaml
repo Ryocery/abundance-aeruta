@@ -6,23 +6,12 @@ on:
       - 'v*'
 
 jobs:
-  build:
+  package:
     runs-on: ubuntu-latest
     
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: '6.0.x'
-
-      - name: Restore dependencies
-        run: dotnet restore abundance-aeruta/abundance-aeruta.csproj
-
-      - name: Build
-        run: dotnet build abundance-aeruta/abundance-aeruta.csproj --configuration Release --no-restore
 
       - name: Create release package
         run: |
@@ -32,22 +21,6 @@ jobs:
           cp LICENSE release/
           cd release
           zip -r ../abundance-aeruta-${{ github.ref_name }}.zip .
-
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: release-package
-          path: abundance-aeruta-${{ github.ref_name }}.zip
-
-  release:
-    needs: build
-    runs-on: ubuntu-latest
-    
-    steps:
-      - name: Download artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: release-package
 
       - name: Create Release
         uses: softprops/action-gh-release@v1

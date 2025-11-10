@@ -7,7 +7,8 @@
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <LangVersion>latest</LangVersion>
         <BepInExPath>/mnt/storage/SteamLibrary/steamapps/common/Aeruta/BepInEx</BepInExPath>
-        <OutputPath>$(BepInExPath)/plugins/abundance-aeruta</OutputPath>
+        <OutputPath Condition="'$(Configuration)' == 'Debug'">$(BepInExPath)/plugins/abundance-aeruta</OutputPath>
+        <OutputPath Condition="'$(Configuration)' == 'Release'">bin/$(Configuration)/$(TargetFramework)</OutputPath>
         <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     </PropertyGroup>
 
