@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "abundance-aeruta", "abundance-aeruta\abundance-aeruta.csproj", "{18AE2467-4070-4C50-AB6E-7512E1D091C9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "abundance-aeruta", "src\abundance-aeruta\abundance-aeruta.csproj", "{18AE2467-4070-4C50-AB6E-7512E1D091C9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{9C927F37-25BC-4B04-A42C-5FB41873AAE6}"
 EndProject
