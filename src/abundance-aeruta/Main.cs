@@ -10,7 +10,7 @@ namespace abundance_aeruta;
 public class Abundance : BasePlugin {
     private const string Guid = "com.ryocery.abundance_aeruta";
     private const string Name = "Abundance";
-    private const string Version = "1.1.0";
+    private const string Version = "1.1.1";
     
     internal new static ManualLogSource Log { get; private set; } = null!;
     private static Harmony _harmony = null!;
